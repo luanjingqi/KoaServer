@@ -9,12 +9,12 @@ let arr = []
 for (let i = 0; i < key_num; i++) {
     let key = ''
     for (let j = 0; j < key_length; j++) {
-        key+=key_char[Math.floor(Math.random()*key_char.length)]
+        key += key_char[Math.floor(Math.random() * key_char.length)]
     }
     arr.push(key)
 }
 
-fs.writeFileSync('.keys',arr.join('\n'))
+fs.writeFileSync('.keys', arr.join('\n'))
 
 
 console.log('完成')
