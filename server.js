@@ -39,15 +39,15 @@ ejs(server,{
 });
 
 //统一处理错误
-// router.use(async (ctx, next)=>{
-//     try {
-//         await next();
-//     } catch (error) {
-//         // ctx.state = 500,
-//         // ctx.body = '服务错误！';
-//         ctx.throw(500,'这个那个的')
-//     }
-// })
+router.use(async (ctx, next)=>{
+    try {
+        await next();
+    } catch (error) {
+        // ctx.state = 500,
+        // ctx.body = '服务错误！';
+        await ctx.throw(500,'这个那个的')
+    }
+})
 
 router.use('/', require('./routers/www'));
 router.use('/admin', require('./routers/admin'));

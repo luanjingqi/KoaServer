@@ -1,3 +1,4 @@
+//生成keys工具
 const fs = require('fs')
 
 const key_num = 2048;
