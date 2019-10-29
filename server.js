@@ -12,6 +12,12 @@ let server = new Koa();
 server.listen(8080);
 
 console.log('server is run in port:8080')
+
+// let server1 = new Koa();
+// //服务器监听端口
+// server1.listen(8081);
+
+// console.log('server is run in port:8081')
 //配置上传文件路径
 server.use(body({
     uploadDir: path.resolve(__dirname,'./static/upload')
@@ -28,6 +34,7 @@ let router = new Router();
 
 //数据库
 server.context.db = require('./libs/database')
+console.log(server.context.db)
 
 //ejs模板引擎加入
 ejs(server,{

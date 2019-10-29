@@ -8,9 +8,9 @@ router
         await ctx.render('admin/login',{})
     })
     .post('/login', async ctx=>{
-        // let {user , password} = ctx.request.fields;
+        let {user , password} = ctx.request.fields;
         ctx.body = '登录成功！'
-        console.log(dblin.query('SELECT * FROM luanjingqi'));
+        console.log(dblin.query('SELECT * FROM luanmanager'));
     })
 
 module.exports = router.routes()
