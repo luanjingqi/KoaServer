@@ -7,7 +7,6 @@ const key_char = 'qwertyuiopasdfghjkl;zxcvbnm,./1234567890-=QWERTYUIOPASDFGHJKLZ
 
 let arr = []
 
-
 for (let i = 0; i < key_num; i++) {
     let key = ''
     for (let j = 0; j < key_length; j++) {
