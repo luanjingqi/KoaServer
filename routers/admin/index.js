@@ -9,8 +9,7 @@ router
     })
     .post('/login', async ctx=>{
         let {user , password} = ctx.request.fields;
-        ctx.body = '登录成功！'
-        console.log(dblink.query('SELECT * FROM luanmanager.users'));
+        await ctx.render (dblink.query('SELECT * FROM luanmanager.users'))
     })
 
 module.exports = router.routes()
