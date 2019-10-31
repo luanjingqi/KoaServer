@@ -28,7 +28,7 @@ let router = new Router();
 
 //数据库
 server.context.db = require('./libs/database')
-console.log(server.context.db)
+console.log('数据库：',server.context.db)
 
 //ejs模板引擎加入
 ejs(server,{

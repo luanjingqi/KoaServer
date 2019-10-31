@@ -8,3 +8,4 @@ let conn = mysql.createPool({
     password: config.DB_PASSWORD,
     database: config.DB_NAME 
 })
+module.exports= conn
