@@ -1,7 +1,6 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const static = require('./routers/static')
-const ejs = require('koa-ejs');
 const path = require('path');
 const body = require('koa-better-body')
 const session = require('koa-session')
@@ -11,7 +10,7 @@ let server = new Koa();
 //服务器监听端口
 server.listen(8080);
 
-console.log('服务启动成功！端口====>8080')
+console.log('服务启动------------------端口：8080----------------------！')
 //配置上传文件路径
 server.use(body({
     uploadDir: path.resolve(__dirname,'./static/upload')
@@ -28,23 +27,14 @@ let router = new Router();
 
 //数据库
 server.context.db = require('./libs/database')
-// console.log('数据库：',server.context.db)
-
-//ejs模板引擎加入
-ejs(server,{
-    root: path.resolve(__dirname,'template'),
-    layout: false,
-    viewExt: 'ejs',
-    cache:false,
-    debug: false
-});
 
 //统一处理错误
 router.use(async (ctx, next)=>{
     try {
         await next();
     } catch (error) {
-        await ctx.throw(500,'服务出错啦！啦啦啦！气不气？')
+        await ctx.throw(500,'服务出错啦！不用看了，找不到错在哪，滚回去看代码去！')
+        console.log(error);
     }
 })
 
