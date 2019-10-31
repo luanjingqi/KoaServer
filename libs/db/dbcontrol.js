@@ -1,4 +1,4 @@
-const dblink = require('../../libs/database')
+const dblink = require('./database')
 
 
 module.exports = {

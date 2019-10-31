@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const dblink = require('../../libs/database')
+const dblink = require('../../libs/db/database')
 const se = require('../../libs/db/dbcontrol')
 
 

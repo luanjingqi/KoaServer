@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 const co = require('co-mysql')
-const config = require('../config')
+const config = require('../../config')
 
 const options = {
     host: config.DB_HOST,

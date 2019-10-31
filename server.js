@@ -26,7 +26,7 @@ server.use(session({
 let router = new Router();
 
 //数据库
-server.context.db = require('./libs/database')
+server.context.db = require('./libs/db/database')
 
 //统一处理错误
 router.use(async (ctx, next)=>{
