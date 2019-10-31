@@ -12,12 +12,6 @@ let server = new Koa();
 server.listen(8080);
 
 console.log('server is run in port:8080')
-
-// let server1 = new Koa();
-// //服务器监听端口
-// server1.listen(8081);
-
-// console.log('server is run in port:8081')
 //配置上传文件路径
 server.use(body({
     uploadDir: path.resolve(__dirname,'./static/upload')
@@ -50,9 +44,7 @@ router.use(async (ctx, next)=>{
     try {
         await next();
     } catch (error) {
-        // ctx.state = 500,
-        // ctx.body = '服务错误！';
-        await ctx.throw(500,'这个那个的')
+        await ctx.throw(500,'服务出错啦！啦啦啦！气不气？')
     }
 })
 
