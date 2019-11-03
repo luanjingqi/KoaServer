@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/Home'
+import Home from '../view/Home'
 
 
 
@@ -12,14 +12,6 @@ export default new Router({
           path : '/',  
           component :  Home   
       },
-    //   {
-    //     path : '/pro',  
-    //     component :  mypro 
-    // },
-    // {
-    //     path : '/form',  
-    //     component :  myform 
-    // },
   ],
       mode: "history"
   })
