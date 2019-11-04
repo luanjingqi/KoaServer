@@ -2,7 +2,7 @@
     <div id="container" style="height: 100%;text-align: center; ">
         <canvas id="canvas"></canvas>
         <div>
-            <Form ref="formInline" :model="formInline" :rules="ruleInline" style=" padding: 60% 0px;z-index: 20;margin-top: 130%;width: 150%;">
+            <Form ref="formInline" :model="formInline" :rules="ruleInline" style=" padding: 60% 0px;z-index: 20;margin-top: 100%;width: 150%;">
                 <FormItem prop="user">
                     <Input type="text" v-model="formInline.user" placeholder="Username" :clearable='isX'>
                         <Icon type="ios-person-outline" slot="prepend"></Icon>
@@ -501,7 +501,6 @@ display: table;
 z-index: 20;
 text-align: center;
 cursor: none;
-left: 15px;
 }
 #container > div {
 	display: table-cell;
@@ -538,8 +537,6 @@ font-size: 5em;
 #stats { 
 	position: absolute; 
 	z-index: 10; 
-	left: 10px; 
-	top: 10px; 
 }
 
 .dg.ac {
