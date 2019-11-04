@@ -9,7 +9,10 @@ const fs = require('fs')
 let server = new Koa();
 //服务器监听端口
 server.listen(8088);
-
+server.use(async (ctx, next) => {
+    ctx.set('Access-Control-Allow-Origin', '*');
+    await next();
+   });
 console.log('服务启动------------------端口：8088----------------------！')
 //配置上传文件路径
 server.use(body({
