@@ -1,17 +1,21 @@
 <template>
-  <div style="height:100%">
-    <Home/>
+  <div style="text-align: -webkit-center;">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from './view/Home'
 export default {
   components: {
-    Home,
   }
 }
 </script>
 
 <style>
+  html{
+    height: 100%;
+  }
+  body{
+    height: 100%;
+  }
 </style>
