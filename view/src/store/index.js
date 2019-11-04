@@ -1,20 +1,31 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
-export const store = new Vuex.Store({
+const store =  new Vuex.Store({
+    strict: true,
     state: {
-        token: '',
-        
-    },
-    actions: {
-        
+        CID: ''
     },
     mutations: {
-        
+        setCid(state, str){
+            state.CID = str
+        }
+    },
+    actions: {
+        setCid({commit}) {
+            let inf = plus.push.getClientInfo();
+            let id = inf.clientid;
+            commit('setCid', id)
+        }
     },
     getters: {
-        
+
+    },
+    modules: {
+
     }
-});
+}); 
+
+export default store;
