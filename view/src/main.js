@@ -7,7 +7,9 @@ import api from './util/axios/api'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/style.css'
+import SlideVerify from 'vue-monoplasty-slide-verify';
 
+Vue.use(SlideVerify);
 Vue.use(Router)
 Vue.use(ViewUI)
 Vue.prototype.$api = api

@@ -1,21 +1,22 @@
 <template>
-    <div id="container" style="height: 100%;text-align: center; ">
-        <canvas id="canvas"></canvas>
-        <div>
-            <Form ref="formInline" :model="formInline" :rules="ruleInline" style=" padding: 60% 0px;z-index: 20;margin-top: 100%;width: 150%;">
+    <div id="container" class="login" style="height: 100%;text-align: center;  ">
+        <canvas id="canvas" ></canvas>
+        <div style="text-align-last: center;">
+            <Form ref="formInline" class="formcss" :model="formInline" :rules="ruleInline" >
                 <FormItem prop="user">
-                    <Input type="text" v-model="formInline.user" placeholder="Username" :clearable='isX'>
-                        <Icon type="ios-person-outline" slot="prepend"></Icon>
-                    </Input>
+                    <Input type="text" v-model="formInline.user" placeholder="Username" :clearable='isX'/>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" placeholder="Password" :clearable='isX'>
-                        <Icon type="ios-lock-outline" slot="prepend"></Icon>
-                    </Input>
+                    <Input type="password" v-model="formInline.password" placeholder="Password" :clearable='isX'/>
                 </FormItem>
-                <FormItem>
-                    <Button type="primary" @click="handleSubmit('formInline')" style="width: 100%;">Signin</Button>
+                <Button v-if="!doYZ" type="primary" @click="showYZ()" style="width: 100%;">点我开启验证</Button>
+                <slide-verify v-if="doYZ" :l="42"  :r="10"  :w="310"  :h="155"  @success="onSuccess"  @fail="onFail"  @refresh="onRefresh"  :slider-text="text"></slide-verify>
+                
+                <FormItem style="margin-top:5%">
+                    <Button v-if="canSign" type="primary" @click="handleSubmit('formInline')" style="width: 100%;">Signin</Button>
+                    <Button v-else disabled type="primary" @click="handleSubmit('formInline')" style="width: 100%;">Signin</Button>
                 </FormItem>
+                
             </Form>
             
         </div>
@@ -28,6 +29,10 @@
     export default {
         data () {
             return {
+                isRobit:0,
+                canSign:false,
+                doYZ:false,
+                text: '右划验证一下和我是不是同类',
                 isX:true,
                 formInline: {
                     user: '',
@@ -35,24 +40,50 @@
                 },
                 ruleInline: {
                     user: [
-                        { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+                        { required: true, message: ()=>{this.$Message.error('老哥!你用户名呢')}, trigger: 'blur' }
                     ],
                     password: [
-                        { required: true, message: 'Please fill in the password.', trigger: 'blur' },
-                        { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+                        { required: true, message: ()=>{this.$Message.error('老哥!你密码呢')}, trigger: 'blur' },
+                        { type: 'string', min: 6, message: ()=>{this.$Message.error('老哥!你那啥太短不敢让你上啊')}, trigger: 'blur' }
                     ]
                 }
             }
         },
         methods: {
+            showYZ(){
+                this.doYZ=true;
+            },
+            onSuccess(){
+             this.$Message.success('老哥!愚蠢的人类恭喜你验证成功');
+            this.isRobit=1;
+            this.canSign=true;
+            },
+            onFail(){
+                 this.$Message.error('老哥!都是机器人何苦为难机器人');
+                this.isRobit=0;this.canSign=false;
+            },
+            onRefresh(){
+                 this.$Message.warning('老哥!再试一试吧');
+                this.isRobit=0;this.canSign=false;
+            },
             handleSubmit(name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        this.$Message.success('Success!');
-                    } else {
-                        this.$Message.error('Fail!');
+                if(this.isRobit==1)
+                {   
+                   
+                    if(this.formInline.user=='admin'&&this.formInline.password=='1234567')
+                    {
+                        this.$Message.success('登录成功!');
+                    }else
+                    {
+                        this.$Message.error('老哥!你是不是不知道密码');
+                        this.onRefresh();
                     }
-                })
+                    this.isRobit=0;this.canSign=false;this,doYZ=false;
+                    
+                }else{
+                        this.$Message.error('请先做身份确认!'); 
+                }
+                    
             }
         }
     }
@@ -241,7 +272,7 @@ function loop() {
 	if(!ctx.running) return;
 
 	ctx.globalCompositeOperation = 'source-over';
-	ctx.fillStyle = 'rgba(8,5,16,0.4)';
+	ctx.fillStyle = '#696969';
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.globalCompositeOperation = 'lighter';
 	ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
@@ -343,7 +374,7 @@ function save() {
 		document.body.appendChild(form);
 	}
 
-	buffer.ctx.fillStyle = 'rgba(8,5,16)';
+	buffer.ctx.fillStyle = '#696969';
 	buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
 	
 	buffer.ctx.drawImage(canvas,
@@ -376,7 +407,6 @@ window.onload = function() {
 	ctx.frame = 1;
 	
 	logo = new Image();
-	logo.src = 'http://labs.nikrowell.com/lightsandmotion/ultraviolet/images/logo.png';
 	
 	hue = new Oscillator({
 		phase: Math.random() * Math.TWO_PI,
@@ -442,59 +472,15 @@ body {
 	user-select: none;
 }
 
-h1 {
-	font: 2.75em 'Cinzel', serif;
-	font-weight: 400;
-	letter-spacing: 0.35em;
-	text-shadow: 0 0 25px rgba(254,254,255,0.85);
-}
-h2 {
-	font: 1.45em 'Cinzel', serif;
-	font-weight: 400;
-	letter-spacing: 0.5em;
-	text-shadow: 0 0 25px rgba(254,254,255,0.85);
-	text-transform: lowercase;
+.ivu-form-item-error-tip{
+    font-size: 40px;
+    color: green;
 }
 
-[class^="letter"] {
-	-webkit-transition: opacity 3s ease;
-	-moz-transition: opacity 3s ease;
-	transition: opacity 3s ease;
-}
-.letter-0  { transition-delay: 0.2s; }
-.letter-1  { transition-delay: 0.4s; }
-.letter-2  { transition-delay: 0.6s; }
-.letter-3  { transition-delay: 0.8s; }
-.letter-4  { transition-delay: 1.0s; }
-.letter-5  { transition-delay: 1.2s; }
-.letter-6  { transition-delay: 1.4s; }
-.letter-7  { transition-delay: 1.6s; }
-.letter-8  { transition-delay: 1.8s; }
-.letter-9  { transition-delay: 2.0s; }
-.letter-10 { transition-delay: 2.2s; }
-.letter-11 { transition-delay: 2.4s; }
-.letter-12 { transition-delay: 2.6s; }
-.letter-13 { transition-delay: 2.8s; }
-.letter-14 { transition-delay: 3.0s; }
 
-h1, h2 {
-	visibility: hidden;
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-}	
-h1.transition-in,
-h2.transition-in {
-	visibility: visible;
-}
-h1 [class^="letter"], 
-h2 [class^="letter"] {
-	opacity: 0;
-}
-h1.transition-in [class^="letter"],
-h2.transition-in [class^="letter"] {
-	opacity: 1;
-}
+
+
+
 
 #container {
 display: table;
@@ -561,5 +547,11 @@ text-decoration: none;
 }
 a:active {
 text-decoration: none;
+}
+.formcss{
+    text-align: -webkit-center;
+    z-index: 20;
+    margin-top: 80%;
+    width: 350px;
 }
 </style>
