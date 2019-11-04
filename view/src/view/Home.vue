@@ -117,9 +117,7 @@ export default {
 </script>
 <!--页面样式-->
 <style scoped>
-    body{
-    height: 100%;
-  }
+    
   .layout{
     border: 1px solid #d7dde4;
     background: #f5f7f9;
@@ -128,6 +126,7 @@ export default {
     overflow: hidden;
     height: 100%;
 }
+
 .layout-logo{
     width: 100px;
     height: 61px;

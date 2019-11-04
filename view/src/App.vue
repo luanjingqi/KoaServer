@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: -webkit-center;">
+  <div class="app" style="text-align: -webkit-center;">
     <router-view></router-view>
   </div>
 </template>
@@ -16,8 +16,11 @@ export default {
     height: 100%;
     overflow: hidden;
 
-  }
+   }
   body{
+    height: 100%;
+  }  
+  .app{
     height: 100%;
   }
 </style>

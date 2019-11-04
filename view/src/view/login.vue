@@ -3,6 +3,7 @@
         <canvas id="canvas" ></canvas>
         <div style="text-align-last: center;">
             <Form ref="formInline" class="formcss" :model="formInline" :rules="ruleInline" >
+				<img src="../assets/logo.png" />
                 <FormItem prop="user">
                     <Input type="text" v-model="formInline.user" placeholder="Username" :clearable='isX'/>
                 </FormItem>
@@ -54,9 +55,10 @@
                 this.doYZ=true;
             },
             onSuccess(){
-             this.$Message.success('老哥!愚蠢的人类恭喜你验证成功');
+             this.$Message.success('愚蠢的人类!恭喜你验证成功');
             this.isRobit=1;
             this.canSign=true;
+            doYZ=false;
             },
             onFail(){
                  this.$Message.error('老哥!都是机器人何苦为难机器人');
@@ -72,7 +74,8 @@
                    
                     if(this.formInline.user=='admin'&&this.formInline.password=='1234567')
                     {
-                        this.$Message.success('登录成功!');
+						this.$Message.success('登录成功!');
+						this.$router.push({path: '..//'});
                     }else
                     {
                         this.$Message.error('老哥!你是不是不知道密码');
@@ -551,7 +554,7 @@ text-decoration: none;
 .formcss{
     text-align: -webkit-center;
     z-index: 20;
-    margin-top: 80%;
+    margin-top: 20%;
     width: 350px;
 }
 </style>
