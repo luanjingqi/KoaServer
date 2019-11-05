@@ -58,7 +58,6 @@
              this.$Message.success('愚蠢的人类!恭喜你验证成功');
             this.isRobit=1;
             this.canSign=true;
-            doYZ=false;
             },
             onFail(){
                  this.$Message.error('老哥!都是机器人何苦为难机器人');
@@ -75,13 +74,12 @@
                     if(this.formInline.user=='admin'&&this.formInline.password=='1234567')
                     {
 						this.$Message.success('登录成功!');
-						this.$router.push({path: '..//'});
+						this.$router.push({path: '/Home'});
                     }else
                     {
                         this.$Message.error('老哥!你是不是不知道密码');
-                        this.onRefresh();
                     }
-                    this.isRobit=0;this.canSign=false;this,doYZ=false;
+                    this.doYZ=false;this.isRobit=0;this.canSign=false;
                     
                 }else{
                         this.$Message.error('请先做身份确认!'); 
@@ -275,7 +273,8 @@ function loop() {
 	if(!ctx.running) return;
 
 	ctx.globalCompositeOperation = 'source-over';
-	ctx.fillStyle = '#696969';
+	ctx.fillStyle = '#dcdcdc';
+	
 	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	ctx.globalCompositeOperation = 'lighter';
 	ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
@@ -377,7 +376,7 @@ function save() {
 		document.body.appendChild(form);
 	}
 
-	buffer.ctx.fillStyle = '#696969';
+	buffer.ctx.fillStyle = '#dcdcdc';
 	buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
 	
 	buffer.ctx.drawImage(canvas,
@@ -554,7 +553,7 @@ text-decoration: none;
 .formcss{
     text-align: -webkit-center;
     z-index: 20;
-    margin-top: 20%;
+    /* margin-top: 10%; */
     width: 350px;
 }
 </style>
