@@ -9,28 +9,34 @@
                     <div class="layout-logo">PLM</div>
                     <div class="layout-nav">
                         <!-- 导航栏循环输出 -->
-                        <MenuItem name="">
-                            <Icon type="ios-keypad"></Icon>
-                            我的任务
-                        </MenuItem>
-                        
+                        <MenuItem v-for="item in topbar" :key="item" :name="item.name"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
                     </div>
                 </Menu>
             </Header >
             <Layout >
                 <Sider style=" text-align: center" >
-                    <Menu width="auto" >
+                    <Menu v-for="item in topbar" :key="item" width="auto"  >
                         <!-- 侧栏循环输出 -->
-                        <Submenu>
-                            <template slot="title" >我的任务</template>
-                        </Submenu>
+                        <MenuItem style=" background-color: #515A6E;color: rgba(255,255,255,.7);">{{item.name}}</MenuItem>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: ' 24px'}">
                   <!-- 展示页面 -->
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
-                       <div style="background:#eee;padding: 10px ;width:390px;display: inline-block;">
-                        <Card style="width:350px">
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss" >
+                                <p slot="title">个人信息</p>
+                                <div style="width:100%;height:80px">
+                                    <img src="../assets/logo.png" style="width:50%;float :left" alt="">
+                                    <span style="font-size: 40px; padding-left: 9%;">Admin</span>
+                                </div>
+                                <hr>
+                                <span style="float :left">本次登陆地点</span><p></p>
+                                <span>天气</span><p></p>
+                             </Card>
+                        </div>
+                       <div class="divcss" >
+                        <Card class="cardcss">
                             <p slot="title"> <Icon type="ios-film-outline"></Icon> Film</p>
                             <a style="color:#2d8cf0" href="#" slot="extra" @click.prevent="changeLimit"><Icon type="ios-loop-strong"></Icon>Change </a>
                             <ul>
@@ -44,17 +50,47 @@
                             </ul>
                         </Card>
                         </div>
-                        <div style="background:#eee;padding: 10px; width:390px;display: inline-block;">
-                        <Card :bordered="false" style="width:350px">
-                            <p slot="title">No border title</p>
-                             </Card>
-                        </div>
-                        <div style="background:#eee;padding: 10px; width:390px;display: inline-block;">
-                            <Card :bordered="false" style="width:350px">
+                        
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
                                 <p slot="title">No border title</p>
                                 </Card>
                         </div>
-                       
+                       <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
                     </Content>
                 </Layout>
             </Layout>
@@ -80,6 +116,16 @@ export default {
                         name: 'Leon:The Professional',
                         url: 'https://movie.douban.com/subject/1295644/',
                         rate: 9.4
+                    },
+                    
+                ],topbar: [
+                    {
+                        name: '我的任务',
+                        url: '/', 
+                    },
+                    {
+                        name: '项目计划',
+                        url: '/', 
                     },
                     
                 ],
@@ -148,5 +194,10 @@ export default {
 
   height: 100%;
 }
-
+.divcss{
+    background:#eee;padding: 10px ;width:390px;display: inline-block;
+}
+.cardcss{
+    width:350px;
+}
 </style>

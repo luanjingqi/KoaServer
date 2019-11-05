@@ -340,7 +340,6 @@ var Stats = function() {
 
         node.vx += (target.x - node.x) * spring;
         node.vy += (target.y - node.y) * spring;
-
         for (var prev, i = 0, n = this.nodes.length; i < n; i++) {
           node = this.nodes[i];
 
@@ -379,7 +378,6 @@ var Stats = function() {
 
           ctx.quadraticCurveTo(a.x, a.y, x, y);
         }
-
         a = this.nodes[i];
         b = this.nodes[i + 1];
 
