@@ -16,5 +16,7 @@ export default new Router({
             path:'/Home',
             component :  Home  
       },
-  ]
+
+  ],
+      mode: "history"
   })

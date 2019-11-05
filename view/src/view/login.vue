@@ -2,7 +2,7 @@
   <div id="container" class="login" style="height: 100%;text-align: center;  ">
     <canvas id="canvas"></canvas>
     <div style="text-align-last: center;">
-      <Form ref="formInline" class="formcss" :model="formInline" :rules="ruleInline">
+      <Form v-if="!ZC" ref="formInline" class="formcss" :model="formInline" :rules="ruleInline">
         <img src="../assets/logo.png" />
         <FormItem prop="user">
           <Input type="text" v-model="formInline.user" placeholder="Username" :clearable="isX" />
@@ -28,30 +28,51 @@
           :slider-text="text"
         ></slide-verify>
 
-        <FormItem style="margin-top:5%">
-          <Button
-            v-if="canSign"
-            type="primary"
-            @click="handleSubmit('formInline')"
-            style="width: 100%;"
-          >Signin</Button>
-          <Button
-            v-else
-            disabled
-            type="primary"
-            @click="handleSubmit('formInline')"
-            style="width: 100%;"
-          >Signin</Button>
-        </FormItem>
+        <FormItem style="margin-top:5%" inline>
+			<Button type="primary" @click="Editnew()" style="width: 50%;">注册</Button>
+          <Button  v-if="canSign" type="primary"  @click="handleSubmit('formInline')"  style="width: 50%;">Signin</Button>
+          <Button  v-else disabled  type="primary"  @click="handleSubmit('formInline')"  style="width: 50%;">Signin</Button>
+		</FormItem>
+		
       </Form>
+		<Form v-if="ZC"  :model="ZhuCe"  :label-width="100">
+			<FormItem label="昵称："  hide-required-mark=false>
+				<Input type="text" v-model="ZhuCe.pw2"/>
+			</FormItem>
+			<FormItem label="用户名：" hide-required-mark=false>
+				<Input  type="text" v-model="ZhuCe.username"/>
+			</FormItem>
+			<FormItem label="密码："  hide-required-mark=false>
+				<Input type="password" v-model="ZhuCe.pw1"/>
+			</FormItem>
+			<FormItem label="确认密码："  hide-required-mark=false>
+				<Input type="password" v-model="ZhuCe.pw2"/>
+			</FormItem>
+			<FormItem label="Phone："  hide-required-mark=false>
+				<Input type="number" v-model="ZhuCe.pw2"/>
+			</FormItem>
+			<FormItem label="Email："  hide-required-mark=false>
+				<Input type="email" v-model="ZhuCe.pw2"/>
+			</FormItem>
+			<FormItem label="生日："  hide-required-mark=false>
+				<Input type="date" v-model="ZhuCe.pw2"/>
+			</FormItem>
+			<FormItem>
+				<Button type="primary" @click="DOZC()">确认注册</Button>
+				<Button @click="ZC=false" style="margin-left: 8px">返回登录</Button>
+			</FormItem>
+		</Form>
     </div>
+		
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      isRobit: 0,
+	formLabelWidth: '120px',
+	  isRobit: 0,
+	  ZC:false,
       canSign: false,
       doYZ: false,
       text: "右划验证一下和我是不是同类",
@@ -59,7 +80,17 @@ export default {
       formInline: {
         user: "",
         password: ""
-      },
+	  },
+	  ZhuCe:{
+		  username:'',
+		  password:'',
+		  pw1:'',
+		  pw2:'',
+		  nickname:'',
+		  email:'',
+		  phone:'',
+		  time:''
+	  },
       ruleInline: {
         user: [
           {
@@ -91,9 +122,37 @@ export default {
     };
   },
   methods: {
+	  DOZC(){
+		  if(this.ZhuCe.pw1==this.ZhuCe.pw2)
+		  {
+			this.ZhuCe.password=this.ZhuCe.pw2;
+			let params={
+				username : this.ZhuCe.username,
+				password : this.ZhuCe.password,
+				nickname : this.ZhuCe.nickname,
+				email : this.ZhuCe.email,
+				phone : this.ZhuCe.phone,
+				time : this.ZhuCe.time
+			};
+			this.$api.login.ZC(params).then(res=>{
+				if(res.data.code==1){
+					this.message.success('注册成功');
+					this.ZC=false;
+				}else{
+					this.message.error('注册失败');
+				}
+			})
+		  }else{
+			  this.message.error("两次密码不一样");
+		  }
+		  this.ZC=false;
+	  },
     showYZ() {
       this.doYZ = true;
-    },
+	},
+	Editnew(){
+			this.ZC=true;
+	},
     onSuccess() {
       this.$Message.success("愚蠢的人类!恭喜你验证成功");
       this.isRobit = 1;
@@ -121,8 +180,11 @@ export default {
 			if (res.data.code == 1) {
 				this.$Message.success("登录成功!");
 				this.$router.push({ path: "/Home" });
-			} else {
-				this.$Message.error("老哥!你是不是不知道密码");
+			} else if(res.data.code ==0) {
+				this.$Message.error("老哥!你是不是不知道密码？");
+				this.onRefresh();
+			} else if(res.data.code ==2) {
+				this.$Message.error("老哥!你是不是还没有账号？");
 				this.onRefresh();
 			}
 			this.isRobit = 0;

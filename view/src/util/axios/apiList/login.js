@@ -18,7 +18,12 @@
          return axios.get(`${baseURL.dev}/login`, {
              params:params
          });
-     }
+     },
+     ZC (params) {
+        return axios.get(`${baseURL.dev}/register`, {
+            params:params
+        });
+    }
  }
  
  export default login;
