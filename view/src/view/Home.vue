@@ -11,7 +11,14 @@
                         <!-- 导航栏循环输出 -->
                         <MenuItem v-for="item in topbar" :key="item" :name="item.name"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
                     </div>
+                    <Dropdown style="float:right" >
+                        <a href="javascript:void(0)" style="color: rgba(255, 255, 255, 0.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
+                        <DropdownMenu slot="list">
+                            <DropdownItem ><router-link to="..//">退出登录</router-link></DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </Menu>
+                
             </Header >
             <Layout >
                 <Sider style=" text-align: center" >
@@ -50,17 +57,22 @@
                             </ul>
                         </Card>
                         </div>
+                        <div class="divcss" style="width:500px">
+                            <Card :bordered="false" class="cardcss" style="width:500px">
+                                <p slot="title">No border title</p>
+                                <Table width="100%" border :columns="columns2" :data="data3"></Table>
+                            </Card>
+                        </div>
+
                         
                         <div class="divcss">
                             <Card :bordered="false" class="cardcss">
                                 <p slot="title">No border title</p>
                                 </Card>
                         </div>
-                       <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
+                        
+                        
+                       
                         <div class="divcss">
                             <Card :bordered="false" class="cardcss">
                                 <p slot="title">No border title</p>
@@ -76,16 +88,7 @@
                                 <p slot="title">No border title</p>
                                 </Card>
                         </div>
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
+                        
                         <div class="divcss">
                             <Card :bordered="false" class="cardcss">
                                 <p slot="title">No border title</p>
@@ -106,6 +109,96 @@ export default {
       
         data () {
             return {
+                visible: false,
+                columns2: [
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        width: 100,
+                        fixed: 'left'
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width: 100
+                    },
+                    {
+                        title: 'Province',
+                        key: 'province',
+                        width: 100
+                    },
+                    {
+                        title: 'City',
+                        key: 'city',
+                        width: 100
+                    },
+                    {
+                        title: 'Address',
+                        key: 'address',
+                        width: 200
+                    },
+                    {
+                        title: 'Postcode',
+                        key: 'zip',
+                        width: 100
+                    },
+                    {
+                        title: 'Action',
+                        key: 'action',
+                        fixed: 'right',
+                        width: 120,
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    }
+                                }, 'View'),
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    }
+                                }, 'Edit')
+                            ]);
+                        }
+                    }
+                ],
+                data3: [
+                    {
+                        name: 'John Brown',
+                        age: 18,
+                        address: 'New York No. 1 Lake Park',
+                        province: 'America',
+                        city: 'New York',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jim Green',
+                        age: 24,
+                        address: 'Washington, D.C. No. 1 Lake Park',
+                        province: 'America',
+                        city: 'Washington, D.C.',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Joe Black',
+                        age: 30,
+                        address: 'Sydney No. 1 Lake Park',
+                        province: 'Australian',
+                        city: 'Sydney',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jon Snow',
+                        age: 26,
+                        address: 'Ottawa No. 2 Lake Park',
+                        province: 'Canada',
+                        city: 'Ottawa',
+                        zip: 100000
+                    }
+                ],
                 movieList: [
                     {
                         name: 'The Shawshank Redemption',
@@ -113,6 +206,18 @@ export default {
                         rate: 9.6
                     },
                     {
+                        name: 'Leon:The Professional',
+                        url: 'https://movie.douban.com/subject/1295644/',
+                        rate: 9.4
+                    },{
+                        name: 'Leon:The Professional',
+                        url: 'https://movie.douban.com/subject/1295644/',
+                        rate: 9.4
+                    },{
+                        name: 'Leon:The Professional',
+                        url: 'https://movie.douban.com/subject/1295644/',
+                        rate: 9.4
+                    },{
                         name: 'Leon:The Professional',
                         url: 'https://movie.douban.com/subject/1295644/',
                         rate: 9.4
@@ -133,6 +238,16 @@ export default {
             }
         },
         methods: {
+            outLogin(name){
+                alert(name);
+				this.$router.replace({ path: "/" });
+            },
+            handleOpen () {
+                this.visible = true;
+            },
+            handleClose () {
+                this.visible = false;
+            },
             changeLimit () {
                 function getArrayItems(arr, num) {
                     const temp_array = [];
@@ -195,7 +310,7 @@ export default {
   height: 100%;
 }
 .divcss{
-    background:#eee;padding: 10px ;width:390px;display: inline-block;
+    background:#eee; padding: 16px ;width:390px;float: left;margin-left: 10px
 }
 .cardcss{
     width:350px;

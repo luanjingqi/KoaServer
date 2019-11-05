@@ -35,7 +35,7 @@
 		</FormItem>
 		
       </Form>
-		<Form v-if="ZC"  :model="ZhuCe"  :label-width="100">
+		<Form v-if="ZC"  :model="ZhuCe" class="formcss"  :label-width="100">
 			<FormItem id="lalala"   >
 				<Input type="text" v-model="ZhuCe.nickname" placeholder="昵称"/>
 			</FormItem>
@@ -170,29 +170,40 @@ export default {
       this.canSign = false;
     },
     handleSubmit(name) {
+
       if (this.isRobit == 1) {
-		  let params = {
-			  username:this.formInline.user,
-			  password:this.formInline.password
-		  }
-		this.$api.login.login(params).then(res => {
-			console.log(res);
-			if (res.data.code == 1) {
-				this.$Message.success("登录成功!");
-				this.$router.push({ path: "/Home" });
-			} else if(res.data.code ==0) {
-				this.$Message.error("老哥!你是不是不知道密码？");
-				this.onRefresh();
-			} else if(res.data.code ==2) {
-				this.$Message.error("老哥!你是不是还没有账号？");
-				this.onRefresh();
-			}
-			this.isRobit = 0;
-			this.canSign = false;
-			this.doYZ = false;
-		})
-        
-      } else {
+        if(this.formInline.user=='')
+        {
+          this.$Message.error("老哥!你sei吖");
+        }else if(this.formInline.password=='')
+        {
+          this.$Message.error("老哥!你密码呢");
+        }else
+        {
+          this.isRobit = 0;
+          this.canSign = false;
+          this.doYZ = false;
+          let params = {
+             username:this.formInline.user,
+            password:this.formInline.password
+          }
+          this.$api.login.login(params).then(res => {
+          if (res.data.code == 1) {
+            this.$Message.success("登录成功!");
+            this.formInline.user=''
+            this.formInline.password=''
+            this.$router.replace({ path: "/Home" });
+          } else if(res.data.code ==0) {
+            this.$Message.error("老哥!你是不是不知道密码？");
+            this.onRefresh();
+          } else if(res.data.code ==2) {
+            this.$Message.error("老哥!你是不是不知道自己是谁？");
+            this.onRefresh();
+          }
+          })
+        } 
+      } else 
+      {
         this.$Message.error("请先做身份确认!");
       }
     }
