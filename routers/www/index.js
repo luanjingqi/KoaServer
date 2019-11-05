@@ -23,5 +23,17 @@ router.get('login', async ctx=>{
     }
     
 })
+router.get('register', async ctx=>{
+    
+    let val = {password,username,nickname,email,phone,time} = url.parse(ctx.url, true).query;
+
+    let result = await sql.insertsql(val,'luanjingqi.user')
+    
+    if (result.data.fieldCount == 0) {
+        ctx.body = {code:1,msg:'注册成功！'}
+    } else {
+        ctx.body = {code:0,msg:'注册失败'}
+    }
+})
 
 module.exports = router.routes()
