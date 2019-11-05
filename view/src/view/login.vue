@@ -36,26 +36,26 @@
 		
       </Form>
 		<Form v-if="ZC"  :model="ZhuCe"  :label-width="100">
-			<FormItem label="昵称："  hide-required-mark=false>
-				<Input type="text" v-model="ZhuCe.pw2"/>
+			<FormItem id="lalala"   >
+				<Input type="text" v-model="ZhuCe.nickname" placeholder="昵称"/>
 			</FormItem>
-			<FormItem label="用户名：" hide-required-mark=false>
-				<Input  type="text" v-model="ZhuCe.username"/>
+			<FormItem >
+				<Input  type="text" v-model="ZhuCe.username" placeholder="用户名"/>
 			</FormItem>
-			<FormItem label="密码："  hide-required-mark=false>
-				<Input type="password" v-model="ZhuCe.pw1"/>
+			<FormItem >
+				<Input type="password" v-model="ZhuCe.pw1" placeholder="密码"/>
 			</FormItem>
-			<FormItem label="确认密码："  hide-required-mark=false>
-				<Input type="password" v-model="ZhuCe.pw2"/>
+			<FormItem >
+				<Input type="password" v-model="ZhuCe.pw2" placeholder="确认密码"/>
 			</FormItem>
-			<FormItem label="Phone："  hide-required-mark=false>
-				<Input type="number" v-model="ZhuCe.pw2"/>
+			<FormItem >
+				<Input type="text" v-model="ZhuCe.phone" placeholder="手机号"/>
 			</FormItem>
-			<FormItem label="Email："  hide-required-mark=false>
-				<Input type="email" v-model="ZhuCe.pw2"/>
+			<FormItem >
+				<Input type="email" v-model="ZhuCe.email" placeholder="邮箱"/>
 			</FormItem>
-			<FormItem label="生日："  hide-required-mark=false>
-				<Input type="date" v-model="ZhuCe.pw2"/>
+			<FormItem >
+				<Input type="date" v-model="ZhuCe.time" placeholder="生日"/>
 			</FormItem>
 			<FormItem>
 				<Button type="primary" @click="DOZC()">确认注册</Button>
@@ -136,14 +136,14 @@ export default {
 			};
 			this.$api.login.ZC(params).then(res=>{
 				if(res.data.code==1){
-					this.message.success('注册成功');
+					this.$Message.success('注册成功');
 					this.ZC=false;
 				}else{
-					this.message.error('注册失败');
+					this.$Message.error('注册失败');
 				}
 			})
 		  }else{
-			  this.message.error("两次密码不一样");
+			  this.$Message.error("两次密码不一样");
 		  }
 		  this.ZC=false;
 	  },
@@ -481,10 +481,11 @@ var Stats = function() {
     if (!ctx.running) return;
 
     ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "#696969";
+    ctx.fillStyle = "#d4d4d4";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.globalCompositeOperation = "lighter";
     ctx.strokeStyle = "hsla(" + Math.round(hue.update()) + ",90%,50%,0.25)";
+    // ctx.strokeStyle = "hsla(" + Math.round(hue.update()) + ",90%,50%,0.25)";
     ctx.lineWidth = 1;
 
     if (ctx.frame % 60 == 0) {
@@ -581,7 +582,7 @@ var Stats = function() {
       document.body.appendChild(form);
     }
 
-    buffer.ctx.fillStyle = "#696969";
+    buffer.ctx.fillStyle = "#d4d4d4";
     buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
 
     buffer.ctx.drawImage(
@@ -766,5 +767,8 @@ a:active {
   z-index: 20;
   margin-top: 20%;
   width: 350px;
+}
+#lalala > .ivu-form-item-label{
+	color: red
 }
 </style>
