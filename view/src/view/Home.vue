@@ -22,9 +22,11 @@
             </Header >
             <Layout >
                 <Sider style=" text-align: center" >
-                    <Menu v-for="item in topbar" :key="item" width="auto"  >
+                    <Menu v-for="item in topbar" :key="item" width="185px"  >
+                        <MenuGroup  :title=item.name style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
                         <!-- 侧栏循环输出 -->
-                        <MenuItem style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 20px;">{{item.name}}</MenuItem>
+                            <MenuItem v-for="child in item.childList" :key="child" style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
+                        </MenuGroup>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: ' 24px'}">
@@ -33,10 +35,9 @@
                         <div class="divcss">
                             <Card :bordered="false" class="cardcss" >
                                 <p slot="title">个人信息</p>
-                                <div style="width:100%;height:80px">
-                                    <img src="../assets/logo.png" style="width:50%;float :left" alt="">
+                                    <img src="../assets/logo.png" style="width:50%;" alt="">
                                     <span style="font-size: 40px; padding-left: 9%;">Admin</span>
-                                </div>
+                                
                                 <hr>
                                 <span style="float :left">本次登陆地点</span><p></p>
                                 <span>天气</span><p></p>
@@ -57,8 +58,9 @@
                             </ul>
                         </Card>
                         </div>
-                        <div class="divcss" style="width:500px">
-                            <Card :bordered="false" class="cardcss" style="width:500px">
+
+                        <div class="divcss" >
+                            <Card :bordered="false" class="cardcss" >
                                 <p slot="title">我是一个没有感情的列表</p>
                                 <Table width="100%" border :columns="columns2" :data="data3"></Table>
                             </Card>
@@ -73,27 +75,7 @@
                         
                         
                        
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
                         
-                        <div class="divcss">
-                            <Card :bordered="false" class="cardcss">
-                                <p slot="title">No border title</p>
-                                </Card>
-                        </div>
                     </Content>
                 </Layout>
             </Layout>
@@ -227,26 +209,66 @@ export default {
                     {
                         name: '我的任务',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'通讯录',
+                                url:'/Home'
+                            },
+                            {
+                                name:'任务中心',
+                                url:'/Home'
+                            },
+                        ],
                     },
                     {
                         name: '项目计划',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'',
+                                url:'/Home'
+                            }
+                        ],
                     },
                     {
                         name: '质量管理',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'',
+                                url:'/Home'
+                            }
+                        ],
                     },
                     {
                         name: '安全管理',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'',
+                                url:'/Home'
+                            }
+                        ],
                     },
                     {
                         name: 'BIM模型',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'',
+                                url:'/Home'
+                            }
+                        ],
                     },
                     {
                         name: '项目报表',
                         url: '/Home', 
+                        childList:[
+                            {
+                                name:'',
+                                url:'/Home'
+                            }
+                        ],
                     },
                     {
                         name: '未完待续',
@@ -331,10 +353,10 @@ export default {
   height: 100%;
 }
 .divcss{
-    background:#eee; padding: 16px ;width:490px;float: left;margin-left: 10px
+    background:#eee; padding: 20px ;width:48%;float: left;margin-left: 10px;height:45%
 }
 .cardcss{
-    width:450px;
+    width:100%;height:100%
 }
 .ivu-menu-dark{
     background:#000000;
@@ -353,4 +375,8 @@ export default {
     
     background:#000000;
 }
+.ivu-layout-sider-children{
+    width:185px;
+}
+
 </style>
