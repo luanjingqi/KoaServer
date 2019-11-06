@@ -192,6 +192,7 @@ export default {
             this.$Message.success("登录成功!");
             this.formInline.user=''
             this.formInline.password=''
+            sessionStorage.setItem('sid', 'isDengLu');
             this.$router.replace({ path: "/Home" });
           } else if(res.data.code ==0) {
             this.$Message.error("老哥!你是不是不知道密码？");

@@ -12,21 +12,30 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
-          path : '/',  
-          component :   login 
-      },{
-            path:'/Home',
-            component :  Home  
-      },
-      {
-        path:'/Time',
-        component :  Time  
+            path: '/',
+            component: login
+        }, {
+            path: '/Home',
+            component: Home,
+            meta: {
+                requireAuth: true 
+            },
         },
         {
-            path:'/list',
-            component :  list  
+            path: '/Time',
+            component: Time,
+            meta: {
+                requireAuth: true  
+            },
+        },
+        {
+            path: '/list',
+            component: list,
+            meta: {
+                requireAuth: true 
+            },
         },
 
-  ],
-      mode: "history"
-  })
+    ],
+    mode: "history"
+})

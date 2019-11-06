@@ -14,7 +14,7 @@
                     <Dropdown style="float:right" >
                         <a href="javascript:void(0)" style="color: rgba(255, 255, 255, 0.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
                         <DropdownMenu slot="list">
-                            <DropdownItem ><router-link to="..//">退出登录</router-link></DropdownItem>
+                            <DropdownItem ><span @click="outLogin()">退出登录</span></DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 </Menu>
@@ -238,8 +238,8 @@ export default {
             }
         },
         methods: {
-            outLogin(name){
-                alert(name);
+            outLogin(){
+                sessionStorage.clear();
 				this.$router.replace({ path: "/" });
             },
             handleOpen () {
