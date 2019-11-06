@@ -19,6 +19,7 @@ router.beforeEach((to, from, next) => {
     if (sessionStorage.getItem('sid')=='isDengLu') { // 查询本地存储信息是否已经登陆 
       next();
     } else {
+      alert("老哥！我还不认识你！");
       next({
         path: '/', // 未登录则跳转至login页面 
       });

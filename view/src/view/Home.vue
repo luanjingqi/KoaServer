@@ -6,15 +6,15 @@
             <Header>
               
                 <Menu mode="horizontal" theme="dark">
-                    <div class="layout-logo">PLM</div>
+                    <div class="layout-logo"><img src="../assets/logo1.png" style="width:150%;" alt=""></div>
                     <div class="layout-nav">
                         <!-- 导航栏循环输出 -->
-                        <MenuItem v-for="item in topbar" :key="item" :name="item.name"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
+                        <MenuItem v-for="item in topbar" :key="item" :name="item.name" style="color: rgba(246, 202, 157, 0.7);width: 14%;font-size: 20px;"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
                     </div>
-                    <Dropdown style="float:right" >
-                        <a href="javascript:void(0)" style="color: rgba(255, 255, 255, 0.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
+                    <Dropdown style="float:right;background:#000000" >
+                        <a href="javascript:void(0)" style="color: rgba(246,202,157,.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
                         <DropdownMenu slot="list">
-                            <DropdownItem ><span @click="outLogin()">退出登录</span></DropdownItem>
+                            <DropdownItem style="background:#000000;height:100%"><span @click="outLogin()" style="color: rgba(246,202,157,.7);">退出登录</span></DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 </Menu>
@@ -24,7 +24,7 @@
                 <Sider style=" text-align: center" >
                     <Menu v-for="item in topbar" :key="item" width="auto"  >
                         <!-- 侧栏循环输出 -->
-                        <MenuItem style=" background-color: #515A6E;color: rgba(255,255,255,.7);">{{item.name}}</MenuItem>
+                        <MenuItem style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 20px;">{{item.name}}</MenuItem>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: ' 24px'}">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="divcss" style="width:500px">
                             <Card :bordered="false" class="cardcss" style="width:500px">
-                                <p slot="title">No border title</p>
+                                <p slot="title">我是一个没有感情的列表</p>
                                 <Table width="100%" border :columns="columns2" :data="data3"></Table>
                             </Card>
                         </div>
@@ -226,11 +226,31 @@ export default {
                 ],topbar: [
                     {
                         name: '我的任务',
-                        url: '/', 
+                        url: '/Home', 
                     },
                     {
                         name: '项目计划',
-                        url: '/', 
+                        url: '/Home', 
+                    },
+                    {
+                        name: '质量管理',
+                        url: '/Home', 
+                    },
+                    {
+                        name: '安全管理',
+                        url: '/Home', 
+                    },
+                    {
+                        name: 'BIM模型',
+                        url: '/Home', 
+                    },
+                    {
+                        name: '项目报表',
+                        url: '/Home', 
+                    },
+                    {
+                        name: '未完待续',
+                        url: '/Home', 
                     },
                     
                 ],
@@ -292,7 +312,7 @@ export default {
     width: 100px;
     height: 61px;
     text-align: center;
-    color: white;
+    color: rgba(246,202,157,.7);
     font-size: 40px;
     float: left;
 }
@@ -300,6 +320,7 @@ export default {
     width: 60%;
     margin: 0 auto;
     margin-left: 7%;
+    color:rgba(246,202,157,.7);
 }
 .ivu-layout-sider-children{
 
@@ -310,9 +331,26 @@ export default {
   height: 100%;
 }
 .divcss{
-    background:#eee; padding: 16px ;width:390px;float: left;margin-left: 10px
+    background:#eee; padding: 16px ;width:490px;float: left;margin-left: 10px
 }
 .cardcss{
-    width:350px;
+    width:450px;
+}
+.ivu-menu-dark{
+    background:#000000;
+}
+.ivu-layout-header{
+    background:#000000;
+}
+.ivu-layout-sider{
+    background:#000000;
+}
+.ivu-select-dropdown{
+    
+    background:#000000;
+}
+.ivu-dropdown-menu{
+    
+    background:#000000;
 }
 </style>

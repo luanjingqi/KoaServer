@@ -29,15 +29,16 @@
         ></slide-verify>
 
         <FormItem style="margin-top:5%" inline>
-			<Button type="primary" @click="Editnew()" style="width: 50%;">注册</Button>
-          <Button  v-if="canSign" type="primary"  @click="handleSubmit('formInline')"  style="width: 50%;">Signin</Button>
-          <Button  v-else disabled  type="primary"  @click="handleSubmit('formInline')"  style="width: 50%;">Signin</Button>
+			<Button type="primary" @click="Editnew()" style="width: 40%;margin-right: 20%;">注册</Button>
+
+          <Button  v-if="canSign" type="primary"  @click="handleSubmit('formInline')"  style="width: 40%;">登录</Button>
+          <Button  v-else disabled  type="primary"  @click="handleSubmit('formInline')"  style="width:40%;">验证后登录</Button>
 		</FormItem>
 		
       </Form>
 		<Form v-if="ZC"  :model="ZhuCe" class="formcss"  :label-width="100">
 			<FormItem id="lalala"   >
-				<Input type="text" v-model="ZhuCe.nickname" placeholder="昵称"/>
+				<Input type="text" v-model="ZhuCe.nickname"  placeholder="昵称"/>
 			</FormItem>
 			<FormItem >
 				<Input  type="text" v-model="ZhuCe.username" placeholder="用户名"/>
@@ -165,7 +166,7 @@ export default {
       this.canSign = false;
     },
     onRefresh() {
-      this.$Message.warning("老哥!再试一试吧");
+      // this.$Message.warning("老哥!再试一试吧");
       this.isRobit = 0;
       this.canSign = false;
     },
