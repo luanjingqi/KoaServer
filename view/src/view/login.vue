@@ -3,7 +3,7 @@
     <canvas id="canvas"></canvas>
     <div style="text-align-last: center;">
       <Form v-if="!ZC" ref="formInline" class="formcss" :model="formInline" :rules="ruleInline">
-        <img src="../assets/logo.png" />
+        <img v-lazy="logo" />
         <FormItem prop="user">
           <Input type="text" v-model="formInline.user" placeholder="Username" :clearable="isX" />
         </FormItem>
@@ -71,7 +71,8 @@
 export default {
   data() {
     return {
-	formLabelWidth: '120px',
+  formLabelWidth: '120px',
+  logo:'../assets/logo.png',
 	  isRobit: 0,
 	  ZC:false,
       canSign: false,

@@ -6,7 +6,7 @@
             <Header>
               
                 <Menu mode="horizontal" theme="dark">
-                    <div class="layout-logo"><img src="../assets/logo1.png" style="width:150%;" alt=""></div>
+                    <div class="layout-logo"><img v-lazy="logo" style="width:150%;" alt=""></div>
                     <div class="layout-nav">
                         <!-- 导航栏循环输出 -->
                         <MenuItem v-for="item in topbar" :key="item" :name="item.name" style="color: rgba(246, 202, 157, 0.7);width: 14%;font-size: 20px;"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
@@ -91,6 +91,7 @@ export default {
       
         data () {
             return {
+                logo:'../assets/logo1.png',
                 visible: false,
                 columns2: [
                     {
