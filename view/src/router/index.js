@@ -20,6 +20,12 @@ export default new Router({
             meta: {
                 requireAuth: true 
             },
+            children:[
+                {
+                    path: '/Home/list',
+                    component: list,
+                }
+            ]
         },
         {
             path: '/Time',

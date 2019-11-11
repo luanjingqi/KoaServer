@@ -15,10 +15,12 @@ html {overflow-y: scroll;}
 .clearfix { *zoom:1; }
 
 
-.ivu-menu-item-group-title{
+.ivu-menu-vertical .ivu-menu-item-group-title{
     
     background: #000;
-    color: red;
+    color: rgba(246,202,157,.7);
     font-size: 25px;
-
+    margin: 0;
+    padding: 0;
+    padding-left: 0px;
 }

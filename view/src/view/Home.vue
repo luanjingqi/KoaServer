@@ -6,10 +6,10 @@
             <Header>
               
                 <Menu mode="horizontal" theme="dark">
-                    <div class="layout-logo"><img v-lazy="logo" style="width:150%;" alt=""></div>
+                    <div class="layout-logo"><img src="../assets/logo1.png" style="width:100%;" alt=""></div>
                     <div class="layout-nav">
                         <!-- 导航栏循环输出 -->
-                        <MenuItem v-for="item in topbar" :key="item" :name="item.name" style="color: rgba(246, 202, 157, 0.7);width: 14%;font-size: 20px;"><Icon type="ios-keypad"></Icon>{{item.name}}</MenuItem>
+                        <MenuItem v-for="item in topbar" :key="item" :name="item" style="color: rgba(246, 202, 157, 0.7);width: 14%;font-size: 20px;"><Icon type="logo-freebsd-devil" />{{item.name}}</MenuItem>
                     </div>
                     <Dropdown style="float:right;background:#000000" >
                         <a href="javascript:void(0)" style="color: rgba(246,202,157,.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
@@ -22,15 +22,26 @@
             </Header >
             <Layout >
                 <Sider style=" text-align: center" >
-                    <Menu v-for="item in topbar" :key="item" width="185px"  >
-                        <MenuGroup  :title=item.name style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
+                    <Menu v-for="item in topbar" :key="item"  width="200px"  >
+                        <MenuGroup :v-if="item.show"  :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
                         <!-- 侧栏循环输出 -->
-                            <MenuItem v-for="child in item.childList" :key="child" style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
+                            <MenuItem v-for="child in item.childList" :key="child" :name="child" style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
                         </MenuGroup>
                     </Menu>
                 </Sider>
                 <Layout :style="{padding: ' 24px'}">
                   <!-- 展示页面 -->
+                   <Tabs type="card" closable @on-tab-remove="handleTabRemove" @on-click="clickTab">
+                        <TabPane label="标签一" v-if="tab0" >
+                            <router-view></router-view>
+                        </TabPane>
+                        <TabPane label="标签二" v-if="tab1">
+                            <router-view></router-view>
+                        </TabPane>
+                        <TabPane label="标签三" v-if="tab2">
+                             <router-view></router-view>
+                        </TabPane>
+                    </Tabs>
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
                         <div class="divcss">
                             <Card :bordered="false" class="cardcss" >
@@ -210,63 +221,69 @@ export default {
                     {
                         name: '我的任务',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
                                 name:'通讯录',
-                                url:'/Home'
+                                url:'/Home',
                             },
                             {
                                 name:'任务中心',
-                                url:'/Home'
+                                url:'/Home',
                             },
                         ],
                     },
                     {
                         name: '项目计划',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
-                                name:'',
+                                name:'项目列表',
                                 url:'/Home'
-                            }
+                            },
                         ],
                     },
                     {
                         name: '质量管理',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
-                                name:'',
+                                name:'CEP',
                                 url:'/Home'
-                            }
+                            },
                         ],
                     },
                     {
                         name: '安全管理',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
-                                name:'',
+                                name:'安全问题单',
                                 url:'/Home'
-                            }
+                            },
                         ],
                     },
                     {
                         name: 'BIM模型',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
-                                name:'',
+                                name:'4D模拟施工',
                                 url:'/Home'
                             }
                         ],
                     },
                     {
-                        name: '项目报表',
+                        name: '报表统计',
                         url: '/Home', 
+                        show:false,
                         childList:[
                             {
-                                name:'',
+                                name:'质量报表',
                                 url:'/Home'
                             }
                         ],
@@ -274,16 +291,23 @@ export default {
                     {
                         name: '未完待续',
                         url: '/Home', 
+                        show:true,
                     },
                     
                 ],
-                randomMovieList: []
+                randomMovieList: [],
+                 tab0: true,
+                tab1: true,
+                tab2: true
             }
         },
         methods: {
             outLogin(){
                 sessionStorage.clear();
 				this.$router.replace({ path: "/" });
+            },
+            clickTab(name){
+                this.$router.replace({path:"/Home/list"});
             },
             handleOpen () {
                 this.visible = true;
@@ -314,7 +338,12 @@ export default {
         },
         mounted () {
             this.changeLimit();
-        }
+        },
+        handleTabRemove (name) {
+            
+                this.$router.replace({path:"/Home"});
+                this['tab' + name] = false;
+            }
     }
   
 
@@ -377,7 +406,7 @@ export default {
     background:#000000;
 }
 .ivu-layout-sider-children{
-    width:185px;
+    width:200px;
 }
 
 </style>

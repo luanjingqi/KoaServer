@@ -3,7 +3,7 @@
     <canvas id="canvas"></canvas>
     <div style="text-align-last: center;">
       <Form v-if="!ZC" ref="formInline" class="formcss" :model="formInline" :rules="ruleInline">
-        <img v-lazy="logo" />
+        <img src="../assets/logo.png" />
         <FormItem prop="user">
           <Input type="text" v-model="formInline.user" placeholder="Username" :clearable="isX" />
         </FormItem>
@@ -15,7 +15,7 @@
             :clearable="isX"
           />
         </FormItem>
-        <Button v-if="!doYZ" type="primary" @click="showYZ()" style="width: 100%;">点我开启验证</Button>
+        <Button v-if="!doYZ" type="primary" @click="showYZ()" style="width: 100%;">点我开启验证!!!!!</Button>
         <slide-verify
           v-if="doYZ"
           :l="42"
