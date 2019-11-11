@@ -22,10 +22,10 @@
             </Header >
             <Layout >
                 <Sider style=" text-align: center" >
-                    <Menu v-for="item in topbar" :key="item"  width="200px"  >
-                        <MenuGroup :v-if="item.show"  :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
+                    <Menu v-for="item in topbar" :key="item"  width="200px" @on-select="clickleft" >
+                        <MenuGroup   :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
                         <!-- 侧栏循环输出 -->
-                            <MenuItem v-for="child in item.childList" :key="child" :name="child" style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
+                            <MenuItem v-for="child in item.childList" :key="child" :name="child"  style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
                         </MenuGroup>
                     </Menu>
                 </Sider>
@@ -37,15 +37,8 @@
                         <TabPane label="主页" type="card" :closable="zhuyeclose" index='0'>
                             <homelist></homelist>
                         </TabPane>
-                        <TabPane label="标签一" v-if="tab0">
-                            <filmlist></filmlist>
-                        </TabPane>
-                        <TabPane label="标签二" v-if="tab1">
-                            <userlist></userlist>
-                        </TabPane>
-                        <TabPane label="标签三" v-if="tab2">
-                             <router-view></router-view>
-                        </TabPane>
+                        <TabPane v-for="item in Bats" :key="item" :label="item.title"><router-view></router-view></TabPane>
+                        
                         </Tabs>
                     </Content>
                 </Layout>
@@ -191,11 +184,11 @@ export default {
                         childList:[
                             {
                                 name:'通讯录',
-                                url:'/Home',
+                                url:'/Home/test',
                             },
                             {
                                 name:'任务中心',
-                                url:'/Home',
+                                url:'/Home/list',
                             },
                         ],
                     },
@@ -261,6 +254,16 @@ export default {
                     },
                     
                 ],
+                Bats:[
+                    {
+                        title:'列表页',
+                        path:'/Home/list'
+                    },
+                    {
+                        title:'Home页',
+                        path:'/Home/test'
+                    }
+                ],
                 randomMovieList: [],
                  tab0: true,
                 tab1: true,
@@ -272,8 +275,21 @@ export default {
                 sessionStorage.clear();
 				this.$router.replace({ path: "/" });
             },
+            clickleft(item){
+                let params={
+                    title:item.name,
+                    path:item.url
+                };
+                this.Bats.push(params);
+            },
             clickTab(name){
-                this.$router.replace({path:"/Home/list"});
+                if(name!=0)
+                {
+                this.$router.replace({path:this.Bats[name-1].path});
+                }else{
+                this.$router.replace({path:'/Home'});
+                }
+                
             },
             handleOpen () {
                 this.visible = true;

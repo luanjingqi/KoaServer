@@ -24,6 +24,10 @@ export default new Router({
                 {
                     path: '/Home/list',
                     component: list,
+                },
+                {
+                    path: '/Home/test',
+                    component: test,
                 }
             ]
         }, {
