@@ -33,8 +33,8 @@
                   <!-- 展示页面 -->
                    
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
-                        <Tabs type="card" closable @on-tab-remove="handleTabRemove" @on-click="clickTab">
-                        <TabPane label="主页" type="card" :closable="zhuyeclose" index='0'>
+                        <Tabs type="card" closable @on-tab-remove="handleTabRemove" @on-click="clickTab" >
+                        <TabPane label="主页" type="card" :closable="zhuyeclose" :index="0">
                             <homelist></homelist>
                         </TabPane>
                         <TabPane v-for="item in Bats" :key="item" :label="item.title"><router-view></router-view></TabPane>
@@ -280,7 +280,16 @@ export default {
                     title:item.name,
                     path:item.url
                 };
+                var isCon = false;
+                var i = 0;
+                for(i;i<this.Bats.length;i++)
+                {
+                    if(this.Bats[i].title==item.name)
+                    isCon=true;
+                }
+                if(!isCon)
                 this.Bats.push(params);
+                this.$router.replace({path:item.url});
             },
             clickTab(name){
                 if(name!=0)
@@ -324,7 +333,6 @@ export default {
         handleTabRemove (name) {
             
                 this.$router.push({path:'/Home'});
-                this['tab' + name] = false;
             }
     }
   
