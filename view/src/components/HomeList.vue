@@ -3,54 +3,54 @@
   <div class="layout">
         <Layout>
           <!-- 导航栏 -->
-            <Header>
-              
-                <Menu mode="horizontal" theme="dark">
-                    <div class="layout-logo"><img src="../assets/logo1.png" style="width:100%;" alt=""></div>
-                    <div class="layout-nav">
-                        <!-- 导航栏循环输出 -->
-                        <MenuItem v-for="item in topbar" :key="item" :name="item" style="color: rgba(246, 202, 157, 0.7);width: 14%;font-size: 20px;"><Icon type="logo-freebsd-devil" />{{item.name}}</MenuItem>
-                    </div>
-                    <Dropdown style="float:right;background:#000000" >
-                        <a href="javascript:void(0)" style="color: rgba(246,202,157,.7);">个人中心<Icon type="ios-arrow-down"></Icon></a>
-                        <DropdownMenu slot="list">
-                            <DropdownItem style="background:#000000;height:100%"><span @click="outLogin()" style="color: rgba(246,202,157,.7);">退出登录</span></DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                </Menu>
-                
-            </Header >
-            <Layout >
-                <Sider style=" text-align: center" >
-                    <Menu v-for="item in topbar" :key="item"  width="200px"  >
-                        <MenuGroup :v-if="item.show"  :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
-                        <!-- 侧栏循环输出 -->
-                            <MenuItem v-for="child in item.childList" :key="child" :name="child" style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
-                        </MenuGroup>
-                    </Menu>
-                </Sider>
-                <Layout :style="{padding: ' 24px'}">
-                  <!-- 展示页面 -->
-                   
+            
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
-                        <Tabs type="card" closable @on-tab-remove="handleTabRemove" @on-click="clickTab">
-                        <TabPane label="主页" type="card" :closable="zhuyeclose" index='0'>
-                            <homelist></homelist>
-                        </TabPane>
-                        <TabPane label="标签一" v-if="tab0">
-                            <filmlist></filmlist>
-                        </TabPane>
-                        <TabPane label="标签二" v-if="tab1">
-                            <userlist></userlist>
-                        </TabPane>
-                        <TabPane label="标签三" v-if="tab2">
-                             <router-view></router-view>
-                        </TabPane>
-                        </Tabs>
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss" >
+                                <p slot="title">个人信息</p>
+                                    <img src="../assets/logo.png" style="width:50%;" alt="">
+                                    <span style="font-size: 40px; padding-left: 9%;">Admin</span>
+                                
+                                <hr>
+                                <span style="float :left">本次登陆地点</span><p></p>
+                                <span>天气</span><p></p>
+                             </Card>
+                        </div>
+                       <div class="divcss" >
+                        <Card class="cardcss">
+                            <p slot="title"> <Icon type="ios-film-outline"></Icon> Film</p>
+                            <a style="color:#2d8cf0" href="#" slot="extra" @click.prevent="changeLimit"><Icon type="ios-loop-strong"></Icon>Change </a>
+                            <ul>
+                                <li v-for="item in randomMovieList" :key="item">
+                                    <a style="color:#2d8cf0" :href="item.url" target="_blank">{{ item.name }}</a>
+                                    <span style=" color:orange ">
+                                        <Icon color="orange" type="ios-star" v-for="n in 4" :key="n"></Icon><Icon  color="orange"  type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon  color="orange"  type="ios-star-half" v-else></Icon>
+                                        {{ item.rate }}
+                                    </span>
+                                </li>
+                            </ul>
+                        </Card>
+                        </div>
+
+                        <div class="divcss" >
+                            <Card :bordered="false" class="cardcss" >
+                                <p slot="title">我是一个没有感情的列表</p>
+                                <Table width="100%" border :columns="columns2" :data="data3"></Table>
+                            </Card>
+                        </div>
+
+                        
+                        <div class="divcss">
+                            <Card :bordered="false" class="cardcss">
+                                <p slot="title">No border title</p>
+                                </Card>
+                        </div>
+                        
+                        
+                       
+                        
                     </Content>
                 </Layout>
-            </Layout>
-        </Layout>
     </div>
 </template>
 
@@ -58,18 +58,12 @@
 
 <!--数据获取处理-->
 <script>
-import homelist from '../components/HomeList';
-import filmlist from '../components/Filmlist';
-import userlist from '../components/UserList';
 export default {
-      components: {
-          homelist,filmlist,userlist
-  },
+      
         data () {
             return {
                 logo:'../assets/logo1.png',
                 visible: false,
-                zhuyeclose:false,
                 columns2: [
                     {
                         title: 'Name',
@@ -183,83 +177,6 @@ export default {
                         rate: 9.4
                     },
                     
-                ],topbar: [
-                    {
-                        name: '我的任务',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'通讯录',
-                                url:'/Home',
-                            },
-                            {
-                                name:'任务中心',
-                                url:'/Home',
-                            },
-                        ],
-                    },
-                    {
-                        name: '项目计划',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'项目列表',
-                                url:'/Home'
-                            },
-                        ],
-                    },
-                    {
-                        name: '质量管理',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'CEP',
-                                url:'/Home'
-                            },
-                        ],
-                    },
-                    {
-                        name: '安全管理',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'安全问题单',
-                                url:'/Home'
-                            },
-                        ],
-                    },
-                    {
-                        name: 'BIM模型',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'4D模拟施工',
-                                url:'/Home'
-                            }
-                        ],
-                    },
-                    {
-                        name: '报表统计',
-                        url: '/Home', 
-                        show:false,
-                        childList:[
-                            {
-                                name:'质量报表',
-                                url:'/Home'
-                            }
-                        ],
-                    },
-                    {
-                        name: '未完待续',
-                        url: '/Home', 
-                        show:true,
-                    },
-                    
                 ],
                 randomMovieList: [],
                  tab0: true,
@@ -307,7 +224,7 @@ export default {
         },
         handleTabRemove (name) {
             
-                this.$router.push({path:'/Home'});
+                this.$router.replace({path:"/Home"});
                 this['tab' + name] = false;
             }
     }

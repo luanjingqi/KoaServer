@@ -4,7 +4,7 @@ import Home from '../view/Home'
 import login from '../view/login'
 import list from '../view/listView'
 import Time from '../components/Time'
-
+import test from '../components/HomeList'
 
 
 Vue.use(Router)
@@ -26,6 +26,12 @@ export default new Router({
                     component: list,
                 }
             ]
+        }, {
+            path: '/test',
+            component: test,
+            meta: {
+                requireAuth: false  
+            },
         },
         {
             path: '/Time',
