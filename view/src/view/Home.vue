@@ -33,7 +33,7 @@
                   <!-- 展示页面 -->
                    
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
-                        <Tabs type="card" :value="TabName" closable @on-tab-remove="handleTabRemove" @on-click="clickTab" >
+                        <Tabs type="card" :value="TabName" closable @on-tab-remove="removeTab" @on-click="clickTab" >
                         <TabPane label="主页" name="主页" type="card" :closable="zhuyeclose" :index="0">
                             <homelist></homelist>
                         </TabPane>
@@ -309,34 +309,19 @@ export default {
             handleClose () {
                 this.visible = false;
             },
-            changeLimit () {
-                function getArrayItems(arr, num) {
-                    const temp_array = [];
-                    for (let index in arr) {
-                        temp_array.push(arr[index]);
-                    }
-                    const return_array = [];
-                    for (let i = 0; i<num; i++) {
-                        if (temp_array.length>0) {
-                            const arrIndex = Math.floor(Math.random()*temp_array.length);
-                            return_array[i] = temp_array[arrIndex];
-                            temp_array.splice(arrIndex, 1);
-                        } else {
-                            break;
-                        }
-                    }
-                    return return_array;
+            removeTab(name) {
+                var i = 0;
+                for(i;i<this.Bats.length;i++)
+                {
+                    if(this.Bats[i].title==name)
+                    break;
                 }
-                this.randomMovieList = getArrayItems(this.movieList, 5);
-            }
-        },
-        mounted () {
-            this.changeLimit();
-        },
-        handleTabRemove (name) {
-            
+                this.Bats.splice(i,1);
+                this.TabName="主页";
                 this.$router.push({path:'/Home'});
-            }
+            },
+        }
+        
     }
   
 
