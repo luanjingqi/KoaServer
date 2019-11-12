@@ -33,11 +33,11 @@
                   <!-- 展示页面 -->
                    
                     <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
-                        <Tabs type="card" closable @on-tab-remove="handleTabRemove" @on-click="clickTab" >
-                        <TabPane label="主页" type="card" :closable="zhuyeclose" :index="0">
+                        <Tabs type="card" :value="TabName" closable @on-tab-remove="handleTabRemove" @on-click="clickTab" >
+                        <TabPane label="主页" name="主页" type="card" :closable="zhuyeclose" :index="0">
                             <homelist></homelist>
                         </TabPane>
-                        <TabPane v-for="item in Bats" :key="item" :label="item.title"><router-view></router-view></TabPane>
+                        <TabPane v-for="item in Bats" :key="item" :name="item.title" :label="item.title"><router-view></router-view></TabPane>
                         
                         </Tabs>
                     </Content>
@@ -63,6 +63,7 @@ export default {
                 logo:'../assets/logo1.png',
                 visible: false,
                 zhuyeclose:false,
+                TabName:'主页',
                 columns2: [
                     {
                         title: 'Name',
@@ -255,14 +256,7 @@ export default {
                     
                 ],
                 Bats:[
-                    {
-                        title:'列表页',
-                        path:'/Home/list'
-                    },
-                    {
-                        title:'Home页',
-                        path:'/Home/test'
-                    }
+                    
                 ],
                 randomMovieList: [],
                  tab0: true,
@@ -289,14 +283,23 @@ export default {
                 }
                 if(!isCon)
                 this.Bats.push(params);
+                this.TabName = item.name;
                 this.$router.replace({path:item.url});
             },
             clickTab(name){
-                if(name!=0)
+                // alert(this.Bats.length);
+                var i=0;
+                for(i;i<this.Bats.length;i++)
                 {
-                this.$router.replace({path:this.Bats[name-1].path});
+                    if(name==this.Bats[i].title)
+                    break;
+                }
+                // alert(i+""+this.Bats.length);
+                if(name!='主页')
+                {
+                    this.$router.replace({path:this.Bats[i].path});
                 }else{
-                this.$router.replace({path:'/Home'});
+                    this.$router.replace({path:'/Home'});
                 }
                 
             },
