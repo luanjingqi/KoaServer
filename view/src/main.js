@@ -9,6 +9,11 @@ import 'view-design/dist/styles/iview.css'
 import SlideVerify from 'vue-monoplasty-slide-verify';
 import './assets/css/style.css'
 import VueLazyload from 'vue-lazyload'
+import { dateUtil } from './util/date2data'
+import { getRequest, postRequest, putRequest, deleteRequest, importRequest, uploadFileRequest } from './util/axios/axios'
+import { setStore, getStore, removeStore } from './util/storage'
+
+
 Vue.use(SlideVerify);
 Vue.use(Router);
 Vue.use(ViewUI);
@@ -18,7 +23,15 @@ Vue.use(VueLazyload, {
   loading: 'http://www.uaidream.cn/image/loading.png', // 图片加载状态下显示的图片
   attempt: 3 //  加载错误后最大尝试次数 默认值:3
 })
+
+
 Vue.prototype.$api = api
+Vue.prototype.$dateUtil = dateUtil
+Vue.prototype.$setStore = setStore;
+Vue.prototype.$getStore = getStore;
+Vue.prototype.$removeStore = removeStore;
+Vue.prototype.$getRequest = getRequest;
+Vue.prototype.$postRequest = postRequest;
 
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
