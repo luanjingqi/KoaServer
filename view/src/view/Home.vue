@@ -5,7 +5,7 @@
           <!-- 导航栏 -->
             <Header>
               
-                <Menu mode="horizontal" theme="dark">
+                <Menu mode="horizontal" theme="dark" @on-select="clickTopBar">
                     <div class="layout-logo"><img src="../assets/logo1.png" style="width:100%;" alt=""></div>
                     <div class="layout-nav">
                         <!-- 导航栏循环输出 -->
@@ -23,7 +23,7 @@
             <Layout >
                 <Sider style=" text-align: center" >
                     <Menu v-for="item in topbar" :key="item"  width="200px" @on-select="clickleft" >
-                        <MenuGroup   :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
+                        <MenuGroup   v-if="item.show" :title="item.name" style="background: #000;color: rgba(246, 202, 157, 0.7);font-size: 25px;">
                         <!-- 侧栏循环输出 -->
                             <MenuItem v-for="child in item.childList" :key="child" :name="child"  style="background-color: rgb(0, 0, 0);color: rgba(246, 202, 157, 0.7);margin-top: 5%;font-size: 15px;width:100%">{{child.name}}</MenuItem>
                         </MenuGroup>
@@ -249,7 +249,7 @@ export default {
                         ],
                     },
                     {
-                        name: '未完待续',
+                        name: '刘大爷',
                         url: '/Home', 
                         show:true,
                     },
@@ -303,12 +303,6 @@ export default {
                 }
                 
             },
-            handleOpen () {
-                this.visible = true;
-            },
-            handleClose () {
-                this.visible = false;
-            },
             removeTab(name) {
                 var i = 0;
                 for(i;i<this.Bats.length;i++)
@@ -320,6 +314,14 @@ export default {
                 this.TabName="主页";
                 this.$router.push({path:'/Home'});
             },
+            clickTopBar(item){
+                var i=0;
+                for(i;i<this.topbar.length;i++)
+                {
+                    this.topbar[i].show=false;
+                }
+                item.show=true;
+            }
         }
         
     }
