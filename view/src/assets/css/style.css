@@ -24,3 +24,6 @@ html {overflow-y: scroll;}
     padding: 0;
     padding-left: 0px;
 }
+.Mitem{
+    color: rgba(246, 202, 157, 0.7)!important;width: 14%;font-size: 20px;
+}
