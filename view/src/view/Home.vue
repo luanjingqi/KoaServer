@@ -212,6 +212,12 @@ export default {
                             {
                                 name:'CEP',
                                 url:'/Home'
+                            },{
+                                name:'CEPC',
+                                url:'/Home'
+                            },{
+                                name:'CLI',
+                                url:'/Home'
                             },
                         ],
                     },
@@ -222,6 +228,9 @@ export default {
                         childList:[
                             {
                                 name:'安全问题单',
+                                url:'/Home'
+                            },{
+                                name:'安全变更单',
                                 url:'/Home'
                             },
                         ],
@@ -234,7 +243,10 @@ export default {
                             {
                                 name:'4D模拟施工',
                                 url:'/Home'
-                            }
+                            },{
+                                name:'BIM模型',
+                                url:'/Home'
+                            },
                         ],
                     },
                     {
@@ -245,6 +257,9 @@ export default {
                             {
                                 name:'质量报表',
                                 url:'/Home'
+                            },{
+                                name:'项目报表',
+                                url:'/Home'
                             }
                         ],
                     },
@@ -252,6 +267,15 @@ export default {
                         name: '刘大爷',
                         url: '/Home', 
                         show:true,
+                        childList:[
+                            {
+                                name:'FPX',
+                                url:'/Home'
+                            },{
+                                name:'牛逼！！！',
+                                url:'/Home'
+                            }
+                        ]
                     },
                     
                 ],
