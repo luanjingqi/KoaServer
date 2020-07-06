@@ -3,7 +3,7 @@
     <canvas id="canvas"></canvas>
     <div style="text-align-last: center;">
       <Form v-if="!ZC" ref="formInline" class="formcss" :model="formInline" :rules="ruleInline">
-        <img src="../assets/logo.png" />
+        <!-- <img src="../assets/logo.png" /> -->
         <FormItem prop="user">
           <Input type="text" v-model="formInline.user" placeholder="Username" :clearable="isX" />
         </FormItem>
@@ -15,7 +15,7 @@
             :clearable="isX"
           />
         </FormItem>
-        <Button v-if="!doYZ" type="primary" @click="showYZ()" style="width: 100%;">点我开启验证!!!!!</Button>
+        <Button v-if="!doYZ" type="primary" @click="showYZ()" style="width: 100%;">{{this.test}}</Button>
         <slide-verify
           v-if="doYZ"
           :l="42"
@@ -29,52 +29,62 @@
         ></slide-verify>
 
         <FormItem style="margin-top:5%" inline>
-			<Button type="primary" @click="Editnew()" style="width: 40%;margin-right: 20%;">注册</Button>
+          <Button type="primary" @click="Editnew()" style="width: 40%;margin-right: 20%;">{{num1}}</Button>
 
-          <Button  v-if="canSign" type="primary"  @click="handleSubmit('formInline')"  style="width: 40%;">登录</Button>
-          <Button  v-else disabled  type="primary"  @click="handleSubmit('formInline')"  style="width:40%;">验证后登录</Button>
-		</FormItem>
-		
+          <Button
+            v-if="canSign"
+            type="primary"
+            @click="handleSubmit('formInline')"
+            style="width: 40%;"
+          >{{test}}</Button>
+          <Button
+            v-else
+            disabled
+            type="primary"
+            @click="handleSubmit('formInline')"
+            style="width:40%;"
+          >{{my_num}}</Button>
+        </FormItem>
       </Form>
-		<Form v-if="ZC"  :model="ZhuCe" class="formcss"  :label-width="100">
-			<FormItem id="lalala"   >
-				<Input type="text" v-model="ZhuCe.nickname"  placeholder="昵称"/>
-			</FormItem>
-			<FormItem >
-				<Input  type="text" v-model="ZhuCe.username" placeholder="用户名"/>
-			</FormItem>
-			<FormItem >
-				<Input type="password" v-model="ZhuCe.pw1" placeholder="密码"/>
-			</FormItem>
-			<FormItem >
-				<Input type="password" v-model="ZhuCe.pw2" placeholder="确认密码"/>
-			</FormItem>
-			<FormItem >
-				<Input type="text" v-model="ZhuCe.phone" placeholder="手机号"/>
-			</FormItem>
-			<FormItem >
-				<Input type="email" v-model="ZhuCe.email" placeholder="邮箱"/>
-			</FormItem>
-			<FormItem >
-				<Input type="date" v-model="ZhuCe.time" placeholder="生日"/>
-			</FormItem>
-			<FormItem>
-				<Button type="primary" @click="DOZC()">确认注册</Button>
-				<Button @click="ZC=false" style="margin-left: 8px">返回登录</Button>
-			</FormItem>
-		</Form>
+      <Form v-if="ZC" :model="ZhuCe" class="formcss" :label-width="100">
+        <FormItem id="lalala">
+          <Input type="text" v-model="ZhuCe.nickname" placeholder="昵称" />
+        </FormItem>
+        <FormItem>
+          <Input type="text" v-model="ZhuCe.username" placeholder="用户名" />
+        </FormItem>
+        <FormItem>
+          <Input type="password" v-model="ZhuCe.pw1" placeholder="密码" />
+        </FormItem>
+        <FormItem>
+          <Input type="password" v-model="ZhuCe.pw2" placeholder="确认密码" />
+        </FormItem>
+        <FormItem>
+          <Input type="text" v-model="ZhuCe.phone" placeholder="手机号" />
+        </FormItem>
+        <FormItem>
+          <Input type="email" v-model="ZhuCe.email" placeholder="邮箱" />
+        </FormItem>
+        <FormItem>
+          <Input type="date" v-model="ZhuCe.time" placeholder="生日" />
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="DOZC()">确认注册</Button>
+          <Button @click="ZC=false" style="margin-left: 8px">返回登录</Button>
+        </FormItem>
+      </Form>
     </div>
-		
   </div>
 </template>
 <script>
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
-  formLabelWidth: '120px',
-  logo:'../assets/logo.png',
-	  isRobit: 0,
-	  ZC:false,
+      formLabelWidth: "120px",
+      logo: "../assets/logo.png",
+      isRobit: 0,
+      ZC: false,
       canSign: false,
       doYZ: false,
       text: "右划验证一下和我是不是同类",
@@ -82,17 +92,17 @@ export default {
       formInline: {
         user: "",
         password: ""
-	  },
-	  ZhuCe:{
-		  username:'',
-		  password:'',
-		  pw1:'',
-		  pw2:'',
-		  nickname:'',
-		  email:'',
-		  phone:'',
-		  time:''
-	  },
+      },
+      ZhuCe: {
+        username: "",
+        password: "",
+        pw1: "",
+        pw2: "",
+        nickname: "",
+        email: "",
+        phone: "",
+        time: ""
+      },
       ruleInline: {
         user: [
           {
@@ -123,38 +133,41 @@ export default {
       }
     };
   },
+
   methods: {
-	  DOZC(){
-		  if(this.ZhuCe.pw1==this.ZhuCe.pw2)
-		  {
-			this.ZhuCe.password=this.ZhuCe.pw2;
-			let params={
-				username : this.ZhuCe.username,
-				password : this.ZhuCe.password,
-				nickname : this.ZhuCe.nickname,
-				email : this.ZhuCe.email,
-				phone : this.ZhuCe.phone,
-				time : this.ZhuCe.time
-			};
-			this.$api.login.ZC(params).then(res=>{
-				if(res.data.code==1){
-					this.$Message.success('注册成功');
-					this.ZC=false;
-				}else{
-					this.$Message.error('注册失败');
-				}
-			})
-		  }else{
-			  this.$Message.error("两次密码不一样");
-		  }
-		  this.ZC=false;
-	  },
+    
+    ...mapActions( [ "setCid" ] ),
+    DOZC() {
+      if (this.ZhuCe.pw1 == this.ZhuCe.pw2) {
+        this.ZhuCe.password = this.ZhuCe.pw2;
+        let params = {
+          username: this.ZhuCe.username,
+          password: this.ZhuCe.password,
+          nickname: this.ZhuCe.nickname,
+          email: this.ZhuCe.email,
+          phone: this.ZhuCe.phone,
+          time: this.ZhuCe.time
+        };
+        this.$api.login.ZC(params).then(res => {
+          if (res.data.code == 1) {
+            this.$Message.success("注册成功");
+            this.ZC = false;
+          } else {
+            this.$Message.error("注册失败");
+          }
+        });
+      } else {
+        this.$Message.error("两次密码不一样");
+      }
+      this.ZC = false;
+    },
     showYZ() {
+      this.setCid("id")
       this.doYZ = true;
-	},
-	Editnew(){
-			this.ZC=true;
-	},
+    },
+    Editnew() {
+      this.ZC = true;
+    },
     onSuccess() {
       this.$Message.success("愚蠢的人类!恭喜你验证成功");
       this.isRobit = 1;
@@ -172,45 +185,47 @@ export default {
       this.canSign = false;
     },
     handleSubmit(name) {
-
       if (this.isRobit == 1) {
-        if(this.formInline.user=='')
-        {
+        if (this.formInline.user == "") {
           this.$Message.error("老哥!你sei吖");
-        }else if(this.formInline.password=='')
-        {
+        } else if (this.formInline.password == "") {
           this.$Message.error("老哥!你密码呢");
-        }else
-        {
+        } else {
           this.isRobit = 0;
           this.canSign = false;
           this.doYZ = false;
           let params = {
-             username:this.formInline.user,
-            password:this.formInline.password
-          }
+            username: this.formInline.user,
+            password: this.formInline.password
+          };
           this.$api.login.login(params).then(res => {
-          if (res.data.code == 1) {
-            this.$Message.success("登录成功!");
-            this.formInline.user=''
-            this.formInline.password=''
-            sessionStorage.setItem('sid', 'isDengLu');
-            this.$router.replace({ path: "/Home" });
-          } else if(res.data.code ==0) {
-            this.$Message.error("老哥!你是不是不知道密码？");
-            this.onRefresh();
-          } else if(res.data.code ==2) {
-            this.$Message.error("老哥!你是不是不知道自己是谁？");
-            this.onRefresh();
-          }
-          })
-        } 
-      } else 
-      {
+            if (res.data.code == 1) {
+              this.$Message.success("登录成功!");
+              this.formInline.user = "";
+              this.formInline.password = "";
+              sessionStorage.setItem("sid", "isDengLu");
+              this.$router.replace({ path: "/Home" });
+            } else if (res.data.code == 0) {
+              this.$Message.error("老哥!你是不是不知道密码？");
+              this.onRefresh();
+            } else if (res.data.code == 2) {
+              this.$Message.error("老哥!你是不是不知道自己是谁？");
+              this.onRefresh();
+            }
+          });
+        }
+      } else {
         this.$Message.error("请先做身份确认!");
       }
     }
-  }
+  },
+  computed: {
+      ...mapState(["test"]),
+      ...mapState( { my_num: "CID" } ),
+      num1: function() {
+        return this.$store.state.num;
+      }
+    },
 };
 
 var Stats = function() {
@@ -693,7 +708,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 body {
-  background: rgb(8, 5, 16);
+  background: rgb(0, 0, 0);
   overflow: hidden;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -782,7 +797,7 @@ a:active {
   margin-top: 20%;
   width: 350px;
 }
-#lalala > .ivu-form-item-label{
-	color: red
+#lalala > .ivu-form-item-label {
+  color: red;
 }
 </style>

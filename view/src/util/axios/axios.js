@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 
 // 统一请求路径前缀
-let base = '/xboot';
+let base = '';
 // 超时设定
 axios.defaults.timeout = 15000;
 

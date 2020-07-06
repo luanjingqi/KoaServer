@@ -20,6 +20,8 @@
     "mysql": "^2.17.1"
   },
   "dependencies": {
-    "koa-body": "^4.1.1"
+    "cheerio": "^1.0.0-rc.3",
+    "koa-body": "^4.1.1",
+    "request": "^2.88.2"
   }
 }
