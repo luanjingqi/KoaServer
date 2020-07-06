@@ -44,7 +44,6 @@
         </Sider>
         <Layout :style="{padding: ' 24px'}">
           <!-- 展示页面 -->
-
           <Content :style="{padding: '24px', minHeight: '280px', background: '#eee'}">
             <Tabs
               type="card"
@@ -321,7 +320,8 @@ export default {
       randomMovieList: [],
       tab0: true,
       tab1: true,
-      tab2: true
+      tab2: true,
+      id: 0
     };
   },
   methods: {
