@@ -1,0 +1,45 @@
+{
+  "name": "dhc-components",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "html-loader": "^1.3.2",
+    "vue": "^2.6.12",
+    "vue-class-component": "^7.2.6",
+    "vue-loader": "^15.9.3",
+    "vue-property-decorator": "^8.5.1",
+    "vue-router": "^3.4.7",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "@vue/cli-plugin-babel": "^4.5.8",
+    "@vue/cli-plugin-eslint": "^4.5.8",
+    "@vue/cli-plugin-router": "^4.5.8",
+    "@vue/cli-plugin-typescript": "^4.5.8",
+    "@vue/cli-plugin-vuex": "^4.5.8",
+    "@vue/cli-service": "^4.5.8",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
+    "highlight": "^0.2.4",
+    "lint-staged": "^10.4.2",
+    "markdown-it": "^12.0.2",
+    "markdown-it-container": "^3.0.0",
+    "markdown-loader": "^6.0.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "vue-template-compiler": "^2.6.12"
+  }
+}
