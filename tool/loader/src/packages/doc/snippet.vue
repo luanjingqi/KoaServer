@@ -24,7 +24,7 @@ import "highlight.js/styles/color-brewer.css";
 export default {
   data() {
     return {
-      showCode: false
+      showCode: false,
     };
   },
   computed: {
@@ -32,8 +32,8 @@ export default {
       return this.showCode
         ? "https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
         : "https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg";
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -96,21 +96,19 @@ export default {
   box-sizing: border-box;
   border-top: 1px solid #ebedf0;
 
-  /deep/ {
-    code {
-      background: #f9f9f9;
-      font-family: Consolas, Menlo, Courier, monospace;
-      border: none;
-      display: block;
-      font-size: 14px;
-      padding: 16px 32px;
-      line-height: 1.5;
-    }
+  code {
+    background: #f9f9f9;
+    font-family: Consolas, Menlo, Courier, monospace;
+    border: none;
+    display: block;
+    font-size: 14px;
+    padding: 16px 32px;
+    line-height: 1.5;
+  }
 
-    .hljs {
-      padding: 0;
-      margin: 0;
-    }
+  .hljs {
+    padding: 0;
+    margin: 0;
   }
 }
 </style>

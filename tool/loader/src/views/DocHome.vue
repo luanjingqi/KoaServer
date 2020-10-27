@@ -5,7 +5,10 @@
         <img src="@/assets/logo.png" />
       </div>
       <div class="home--header-title">
-        VUE-UI-DOCS-LUAN
+        VUE-UI-DOCS
+      </div>
+      <div class="home--header-github" @click="handleGitbubClick">
+        <img src="@/assets/logo.png" />
       </div>
     </div>
     <div class="home--left">
@@ -34,7 +37,11 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    handleGitbubClick() {
+      window.open("https://github.com/kitorv/vue-ui-docs");
+    },
+  },
 };
 </script>
 

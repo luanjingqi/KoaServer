@@ -2,7 +2,7 @@
 
 ## 介绍
 
-vue-ui-docs-luan 基于 vue.js 2.x 组件库。
+vue-ui-docs 基于 vue.js 2.x 组件库。
 
 ## 安装
 
